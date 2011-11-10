@@ -1,7 +1,7 @@
 " be improved
 set nocompatible
 " mouse support
-set mouse=n
+set mouse=ni
 " line numbers
 set nu
 " colors
