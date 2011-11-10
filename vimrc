@@ -1,7 +1,7 @@
-" don't be vi compatible
+" be improved
 set nocompatible
 " mouse support
-set mouse=a
+set mouse=n
 " line numbers
 set nu
 " colors
@@ -23,8 +23,9 @@ set sw=4
 " searching
 set ic
 set scs
-set hls
+set hlsearch
 set showmatch
+set incsearch
 " visual bell
 set vb
 " tmp paths
