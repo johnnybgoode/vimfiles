@@ -15,7 +15,7 @@ endif
 let s:cpo_save = &cpo
 set cpo&vim
 
-CompilerSet makeprg=php5\ %
+CompilerSet makeprg=php\ -l\ %
 
 "
 CompilerSet errorformat=%m
