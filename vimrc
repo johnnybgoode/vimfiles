@@ -48,7 +48,7 @@ set cursorcolumn
 hi CursorLine cterm=NONE ctermbg=234 " #1c1c1c
 hi CursorColumn cterm=NONE ctermbg=234  " #1c1c1c
 " use unnamed register for global clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 " force tabs
 nnoremap gf <C-W>gf
 cab et tabe
