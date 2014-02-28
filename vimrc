@@ -9,7 +9,7 @@ syntax on
 set t_Co=256
 set background=dark
 " colorscheme tango_jeiv
-colorscheme autumn
+colorscheme candycode
 " file type
 set fileformats=unix,mac
 " backspacing
@@ -39,8 +39,10 @@ set timeoutlen=500
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+if expand('%:t') != ''
+	au BufWinLeave * mkview
+	au BufWinEnter * silent loadview
+endif
 " current line/column highlighting
 " color list: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
 set cursorline
