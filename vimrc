@@ -10,13 +10,21 @@ set nu
 " colors
 syntax on
 
-"set t_Co=256 " let $TERM regulate this setting
-set background=dark
+" Override colors and highlight groups after colorscheme is loaded
+autocmd ColorScheme * hi Normal ctermbg=234 guibg=#1c1c1c
+autocmd ColorScheme * hi StatusLine ctermbg=NONE guibg=#1c1c1c
+" auto highlight trailing whitespace
+autocmd ColorScheme * hi TrailingWhitespace guifg=#ffffe0 guibg=#284f28 ctermfg=230 ctermbg=22
+autocmd ColorScheme * match TrailingWhitespace /\s\+$/
+
 " colorscheme tango_jeiv
 " colorscheme candycode
-:let g:zenburn_transparent=1
-:let g:zenburn_high_Contrast=1
+let g:zenburn_transparent=1
+"let g:zenburn_high_Contrast=1
+let g:zenburn_alternate_Visual=1
+let g:zenburn_disable_Lable_underline=1
 colorscheme zenburn
+
 
 " file type
 set fileformats=unix,mac
@@ -64,7 +72,7 @@ endif
 " color list: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
 set cursorline
 set cursorcolumn
-hi CursorLine cterm=NONE ctermbg=234 " #1c1c1c
+hi CursorLine cterm=NONE ctermbg=235 " #1c1c1c
 hi CursorColumn cterm=NONE ctermbg=234  " #1c1c1c
 
 " use unnamed register for global clipboard
@@ -78,38 +86,48 @@ cab et tabe
 let mapleader=" "
 
 " easy editing/reloading of vimrc
-:nmap <leader>s :source $HOME/.vimrc<enter>
-:nmap <leader>v :et $HOME/.vimrc<enter>
+nmap <leader>s :source $HOME/.vimrc<enter>
+nmap <leader>v :et $HOME/.vimrc<enter>
+
+" better line traversal
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+" emulate emacs/bash Ctrl-a and Ctrl-e movement in the : prompt
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
 
 " misc shortcuts
-:nmap <leader>A $ 
-:nmap <leader>I ^
-:nmap m :set mouse=<enter>
-:nmap M :set mouse=ni<enter>
-:nmap <leader>t :retab<CR>
+nmap <leader>a $
+nmap <leader>i ^
+nmap m :set mouse=<enter>
+nmap M :set mouse=ni<enter>
+nmap <leader>t :retab<CR>
 
 " mouse wheel for scrolling only
-:map <MiddleMouse> <Nop>
-:imap <MiddleMouse> <Nop>
-:map <2-MiddleMouse> <Nop>
-:imap <2-MiddleMouse> <Nop>
-:map <3-MiddleMouse> <Nop>
-:imap <3-MiddleMouse> <Nop>
-:map <4-MiddleMouse> <Nop>
-:imap <4-MiddleMouse> <Nop>
-:map <5-MiddleMouse> <Nop>
-:imap <5-MiddleMouse> <Nop>
+map <MiddleMouse> <Nop>
+imap <MiddleMouse> <Nop>
+map <2-MiddleMouse> <Nop>
+imap <2-MiddleMouse> <Nop>
+map <3-MiddleMouse> <Nop>
+imap <3-MiddleMouse> <Nop>
+map <4-MiddleMouse> <Nop>
+imap <4-MiddleMouse> <Nop>
+map <5-MiddleMouse> <Nop>
+imap <5-MiddleMouse> <Nop>
 
 " smart indent when entering insert mode with i on emtpy line
-function! IndentWithI()
-  if len(getline('.')) == 0
-    return "\"_ddO\n"
-  else
-    return "i"
-  endif
-endfunction
+"function! IndentWithI()
+"  if len(getline('.')) == 0
+"    return "\"_ddO"
+"  else
+"    return "i"
+"  endif
+"endfunction
 
-nnoremap <expr> i IndentWithI()
+"nnoremap <expr> i IndentWithI()
 
 " make this into a plugin
 " :silent execute \"!myscript &>/dev/null &\" | redraw!
@@ -118,4 +136,28 @@ nnoremap <expr> i IndentWithI()
 execute pathogen#infect()
 
 "  nerdtree
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+"  airline
+set laststatus=2
+
+let g:airline_powerline_fonts=1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+let g:airline_inactive_collapse=1
+
+"  tmuxline
+" disable so tmuxline doesn't overwrite the tmux config
+let g:airline#extensions#tmuxline#enabled = 0
+
+"  Ctrl-P
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.(git|hg|svn)\|node_modules$\|log\|tmp$',
+  \ 'file': '\.(so|dat|DS_Store)$',
+  \ }
