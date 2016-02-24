@@ -57,7 +57,7 @@ set backupdir=/tmp
 set directory=/tmp
 
 " timeout
-set timeoutlen=500
+set timeoutlen=250
 
 " code folding
 set foldmethod=indent
@@ -81,6 +81,10 @@ set clipboard=unnamedplus
 " force tabs
 nnoremap gf <C-W>gf
 cab et tabe
+
+" remap tap navigation
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
 
 "remap leader (\)
 let mapleader=" "
@@ -110,8 +114,8 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 " misc shortcuts
 nmap <leader>a $
 nmap <leader>i ^
-nmap m :set mouse=<enter>
-nmap M :set mouse=ni<enter>
+nmap <leader>m :set mouse=<enter>
+nmap <leader>M :set mouse=ni<enter>
 nmap <leader>t :retab<CR>
 
 " mouse wheel for scrolling only
@@ -125,6 +129,10 @@ map <4-MiddleMouse> <Nop>
 imap <4-MiddleMouse> <Nop>
 map <5-MiddleMouse> <Nop>
 imap <5-MiddleMouse> <Nop>
+
+
+" Turn off swap
+set noswapfile
 
 " smart indent when entering insert mode with i on emtpy line
 "function! IndentWithI()
@@ -164,8 +172,12 @@ let g:airline#extensions#tmuxline#enabled = 0
 
 "  Ctrl-P
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.(git|hg|svn)\|node_modules$\|log\|tmp$',
   \ 'file': '\.(so|dat|DS_Store)$',
   \ }
+nmap <leader>lw :CtrlP<CR><C-\>w
+
+" Tagbar
+nnoremap <leader>tt :TagbarToggle<CR>
