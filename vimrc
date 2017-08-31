@@ -3,6 +3,9 @@ set nocompatible
 
 " mouse support
 set mouse=ni
+if &term =~ '^screen'
+  set ttymouse=xterm2
+endif
 
 " line numbers
 set nu
