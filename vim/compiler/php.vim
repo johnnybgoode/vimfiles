@@ -1,12 +1,12 @@
 " Vim Compiler File
-" Compiler:	php5
+" Compiler:	php
 " Maintainer:	John Entwistle <jentwistle@contextllc.com>
 " Last Change:	Wed, 13 Sept 1010 21:44:47 EST
 
 if exists("current_compiler")
     finish
 endif
-let current_compiler = "php5"
+let current_compiler = "php"
 
 if exists(":CompilerSet") != 2		" older Vim always used :setlocal
   command -nargs=* CompilerSet setlocal <args>

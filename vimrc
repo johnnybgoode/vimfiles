@@ -40,6 +40,8 @@ set statusline+=%=    " Switch to the right side
 set statusline+=%l    " Current line
 set statusline+=/     " Separator
 set statusline+=%L    " Total lines
+set statusline+=:
+set statusline+=%c
 
 " backspacing
 set backspace=indent,eol,start
@@ -135,6 +137,10 @@ nmap <leader>m :set mouse=<enter>
 nmap <leader>M :set mouse=ni<enter>
 nmap <leader>t :retab<CR>:%s;^\(\s\{2\}\);\=repeat(' ', len(submatch(0)));g<CR>:noh<CR>:0<CR>
 
+" Quit on :Q because sometimes you sit on the Shift too long.
+:command Q q
+:command Qa qa
+
 " mouse wheel for scrolling only
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
@@ -150,6 +156,7 @@ imap <5-MiddleMouse> <Nop>
 
 " Turn off swap
 set noswapfile
+set backupcopy=yes
 
 " smart indent when entering insert mode with i on emtpy line
 "function! IndentWithI()
