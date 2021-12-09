@@ -1,0 +1,9 @@
+editorconfig: git@github.com:editorconfig/editorconfig-vim.git
+fzf: git@github.com:junegunn/fzf.vim.git
+nerdtree: git@github.com:scrooloose/nerdtree.git
+php.vim: git@github.com:StanAngeloff/php.vim.git
+tagbar:
+tmuxline: git@github.com:edkolev/tmuxline.vim.git
+vim-airline: git@github.com:vim-airline/vim-airline.git
+vim-fugitive: git@github.com:tpope/vim-fugitive.git
+vim-twig: git@github.com:nelsyeung/twig.vim.git
