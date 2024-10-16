@@ -76,7 +76,7 @@ hi CursorLine cterm=NONE ctermbg=235 " #1c1c1c
 hi CursorColumn cterm=NONE ctermbg=234  " #1c1c1c
 
 " use unnamed register for global clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " force tabs
 nnoremap gf <C-W>gf
@@ -87,6 +87,7 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 "remap leader (\)
+nnoremap <Space> <Nop>
 let mapleader=" "
 
 " easy editing/reloading of vimrc
@@ -98,6 +99,15 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+
+" colemak line traversal
+let colemak=0
+if colemak==1
+  remap n h
+  remap e j
+  remap i k
+  remap l o
+endif
 
 " emulate emacs/bash Ctrl-a and Ctrl-e movement in the : prompt
 cnoremap <C-A> <Home>
@@ -112,8 +122,8 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " misc shortcuts
-nmap <leader>a $
-nmap <leader>i ^
+nmap <leader>a u$
+nnoremap <leader>i ^
 nmap <leader>m :set mouse=<enter>
 nmap <leader>M :set mouse=ni<enter>
 nmap <leader>t :retab<CR>
@@ -130,6 +140,11 @@ imap <4-MiddleMouse> <Nop>
 map <5-MiddleMouse> <Nop>
 imap <5-MiddleMouse> <Nop>
 
+" replace word with buffer
+" TODO figure out better handling for middle of line vs end of line
+" instaed of two mappings
+nnoremap  <leader>r :execute 'normal "tdw' <bar> :execute 'normal "*p' <CR>
+nnoremap  <leader>R :execute 'normal "tdw' <bar> :execute 'normal "*P' <CR>
 
 " Turn off swap
 set noswapfile
@@ -181,3 +196,8 @@ nmap <leader>lw :CtrlP<CR><C-\>w
 
 " Tagbar
 nnoremap <leader>tt :TagbarToggle<CR>
+
+" Colebmak
+nnoremap <leader>K source "$HOME/.vim/vim-colemak/plugin/colemak.vim"
+
+" Surround
