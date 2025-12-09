@@ -163,7 +163,21 @@ set noswapfile
 " make this into a plugin
 " :silent execute \"!myscript &>/dev/null &\" | redraw!
 
-" plugins
+" Install plugins
+call plug#begin()
+
+Plug 'edkolev/tmuxline.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'kien/ctrlp.vim'
+Plug 'preservim/nerdtree'
+Plug 'preservim/tagbar'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+call plug#end()
+
+" Plugin config
 
 "  nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR>
