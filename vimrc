@@ -164,7 +164,6 @@ set noswapfile
 " :silent execute \"!myscript &>/dev/null &\" | redraw!
 
 " plugins
-execute pathogen#infect()
 
 "  nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR>
