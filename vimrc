@@ -163,11 +163,19 @@ set noswapfile
 " make this into a plugin
 " :silent execute \"!myscript &>/dev/null &\" | redraw!
 
+" Plugins: vim-plug
+"
+" :PlugInstall to install the plugins
+" :PlugUpdate to install or update the plugins
+" :PlugDiff to review the changes from the last update
+" :PlugClean to remove plugins no longer in the list
+
 " Install plugins
 call plug#begin()
 
 Plug 'edkolev/tmuxline.vim'
 Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
+Plug 'https://github.com/johnnybgoode/format-keymap.vim.git'
 Plug 'justinmk/vim-sneak'
 Plug 'kien/ctrlp.vim'
 Plug 'preservim/nerdtree'
@@ -218,52 +226,4 @@ nnoremap <leader>K source "$HOME/.vim/vim-colemak/plugin/colemak.vim"
 " Surround
 
 
-" ZMK
-"
-function! ZReplace(l_start, l_end)
-  " :<, >s/[ ]{2,}/;;/g
-  execute a:l_start . ',' . a:l_end . 's/[ ]\{2,\}/;;/g'
-  " reselect the visual area after the command executes
-  execute "normal! gv"
-endfunction
-
-function! ZPad(l_start, l_end)
-  let i = 0
-  let delim = ';;'
-  let num_lns = a:l_end - a:l_start
-  let upr_lns = num_lns - 2  " number of non-thumb rows
-  let upr_d   = repeat(delim, 7)
-  let lwr_d   = repeat(delim, 2)
-
-  for ln in range(a:l_start, a:l_end)
-    if i <= upr_lns
-      let cur_line = getline(ln)
-      let new_line = substitute(cur_line, ',;;', ','.upr_d, 'g')
-      call setline(ln, new_line)
-    endif
-    if i == num_lns
-      let cur_line = getline(ln)
-      let new_line = substitute(cur_line, ',;;', ','.lwr_d, '')
-      let new_line = substitute(new_line, '.*,\zs;;\ze', lwr_d, 'g')
-      call setline(ln, new_line)
-    endif
-    let i = i + 1
-  endfor
-  execute "normal! gv"
-endfunction
-
-function! ZFormatTable() range
-  let l:l_start = a:firstline
-  let l:l_end = a:lastline
-
-  call ZReplace(l_start, l_end)
-  call ZPad(l_start, l_end)
-
-  let column = '/opt/homebrew/opt/util-linux/bin/column'
-  execute ': silent ' . l_start . ',' . l_end . "! COLS=`echo {1..35} | sed 's/ /,/g'`; " . column . " -s';;' -o' ' -t -R \"$COLS\" 2>/dev/null"
-
-  execute "normal! \<esc>"
-endfunction
-
-command! -range ZTable <line1>,<line2>call ZFormatTable()
-
+""
