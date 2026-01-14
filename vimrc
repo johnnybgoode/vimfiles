@@ -82,7 +82,7 @@ set clipboard=unnamed
 nnoremap gf <C-W>gf
 cab et tabe
 
-" remap tap navigation
+" remap tab navigation
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
@@ -92,7 +92,7 @@ let mapleader=" "
 
 " easy editing/reloading of vimrc
 nmap <leader>s :source $HOME/.vimrc<enter>
-nmap <leader>v :et $HOME/.vimrc<enter>
+nmap <leader>e :et $HOME/.vimrc<enter>
 
 " better line traversal
 nnoremap j gj
@@ -163,11 +163,34 @@ set noswapfile
 " make this into a plugin
 " :silent execute \"!myscript &>/dev/null &\" | redraw!
 
-" plugins
-execute pathogen#infect()
+" Plugins: vim-plug
+"
+" :PlugInstall to install the plugins
+" :PlugUpdate to install or update the plugins
+" :PlugDiff to review the changes from the last update
+" :PlugClean to remove plugins no longer in the list
+
+" Install plugins
+call plug#begin()
+
+Plug 'edkolev/tmuxline.vim'
+Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
+Plug 'https://github.com/johnnybgoode/format-keymap.vim.git'
+Plug 'justinmk/vim-sneak'
+Plug 'kien/ctrlp.vim'
+Plug 'preservim/nerdtree'
+Plug 'preservim/tagbar'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+call plug#end()
+
+" Plugin config
 
 "  nerdtree
 nnoremap <leader>n :NERDTreeToggle<CR>
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "  airline
 set laststatus=2
@@ -197,7 +220,10 @@ nmap <leader>lw :CtrlP<CR><C-\>w
 " Tagbar
 nnoremap <leader>tt :TagbarToggle<CR>
 
-" Colebmak
+" Colemak
 nnoremap <leader>K source "$HOME/.vim/vim-colemak/plugin/colemak.vim"
 
 " Surround
+
+
+""
