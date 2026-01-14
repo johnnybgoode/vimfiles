@@ -19,12 +19,11 @@ autocmd ColorScheme * match TrailingWhitespace /\s\+$/
 
 " colorscheme tango_jeiv
 " colorscheme candycode
-let g:zenburn_transparent=1
+"let g:zenburn_transparent=1
 "let g:zenburn_high_Contrast=1
-let g:zenburn_alternate_Visual=1
-let g:zenburn_disable_Lable_underline=1
-colorscheme zenburn
-
+"let g:zenburn_alternate_Visual=1
+"let g:zenburn_disable_Lable_underline=1
+colorscheme melange_jeiv
 
 " file type
 set fileformats=unix,mac
@@ -203,6 +202,8 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 let g:airline_inactive_collapse=1
+
+let g:airline_theme='angr'
 
 "  tmuxline
 " disable so tmuxline doesn't overwrite the tmux config
