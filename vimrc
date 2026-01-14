@@ -99,13 +99,17 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" esc saver
+inoremap jk <esc>
+inoremap ,. <esc>
+
 " colemak line traversal
 let colemak=0
 if colemak==1
-  remap n h
-  remap e j
-  remap i k
-  remap l o
+  nnoremap n h
+  nnoremap e j
+  nnoremap i k
+  nnoremap o l
 endif
 
 " emulate emacs/bash Ctrl-a and Ctrl-e movement in the : prompt
@@ -121,7 +125,7 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " misc shortcuts
-nmap <leader>a u$
+nmap <leader>a $
 nnoremap <leader>i ^
 nmap <leader>m :set mouse=<enter>
 nmap <leader>M :set mouse=ni<enter>
