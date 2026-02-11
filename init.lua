@@ -6,12 +6,28 @@ vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.timeoutlen = 500
 
-vim.g.mapleader = "<Space>"
+vim.wo.relativenumber = true
+
+vim.g.mapleader = " "
 vim.keymap.set('c', '<C-A>', '<Home>')
 vim.keymap.set('c', '<C-E>', '<End>')
 vim.keymap.set('n', '<leader>i', '^')
 vim.keymap.set('n', '<leader>a', '$')
 vim.keymap.set('i', 'nn', '<Esc>', { silent = true })
+vim.keymap.set('n', '<leader>s', function()
+  vim.cmd("source %")
+  vim.notify("Neovim config reload!", vim.log.levels.INFO)
+end)
+
+-- autosave
+vim.opt.updatetime=2000
+vim.api.nvim_create_autocmd({"InsertLeave", "CursorHold"}, {
+  pattern = {"*"},
+  callback = function()
+    vim.cmd("silent! update")
+  end,
+  desc = "Autosave",
+})
 
 -- Plugins
 -- set the root directory for lazy.nvim
