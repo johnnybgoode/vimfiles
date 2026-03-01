@@ -7,29 +7,14 @@ set mouse=ni
 " line numbers
 set nu
 
-" colors
-syntax on
-
-" Override colors and highlight groups after colorscheme is loaded
-autocmd ColorScheme * hi Normal ctermbg=234 guibg=#1c1c1c
-autocmd ColorScheme * hi StatusLine ctermbg=NONE guibg=#1c1c1c
-" auto highlight trailing whitespace
-autocmd ColorScheme * hi TrailingWhitespace guifg=#ffffe0 guibg=#284f28 ctermfg=230 ctermbg=22
-autocmd ColorScheme * match TrailingWhitespace /\s\+$/
-
-" colorscheme tango_jeiv
-" colorscheme candycode
-"let g:zenburn_transparent=1
-"let g:zenburn_high_Contrast=1
-"let g:zenburn_alternate_Visual=1
-"let g:zenburn_disable_Lable_underline=1
-colorscheme melange_jeiv
-
 " file type
 set fileformats=unix,mac
 
 " backspacing
 set backspace=indent,eol,start
+
+" use unnamed register for global clipboard
+set clipboard=unnamed
 
 " indentation
 set autoindent
@@ -51,6 +36,33 @@ set incsearch
 " visual bell
 set vb
 
+" autosave
+set updatetime=2000
+function! AutoSave()
+ if &readonly==0 && filereadable(bufname('%'))
+  silent update
+ endif
+endfunction
+
+autocmd InsertLeave,CursorHold  * call AutoSave()
+
+" colors
+syntax on
+set re=0
+
+colorscheme melange_jeiv
+
+" highlight trailing whitespace
+autocmd ColorScheme * hi TrailingWhitespace guifg=#ffffe0 guibg=#E2C28C ctermfg=230 ctermbg=11
+autocmd ColorScheme * match TrailingWhitespace /\s\+$/
+
+" current line/column highlighting
+" color list: https://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+set cursorline
+set cursorcolumn
+hi CursorLine cterm=NONE ctermbg=236 " #1c1c1c
+hi CursorColumn cterm=NONE ctermbg=236 " #1c1c1c
+
 " tmp paths
 set backupdir=/tmp
 set directory=/tmp
@@ -60,22 +72,12 @@ set timeoutlen=250
 
 " code folding
 set foldmethod=indent
-set foldnestmax=10
+set foldnestmax=10 
 set nofoldenable
-if expand('%:t') != ''
-  au BufWinLeave * mkview
-  au BufWinEnter * silent loadview
-endif
-
-" current line/column highlighting
-" color list: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
-set cursorline
-set cursorcolumn
-hi CursorLine cterm=NONE ctermbg=235 " #1c1c1c
-hi CursorColumn cterm=NONE ctermbg=234  " #1c1c1c
-
-" use unnamed register for global clipboard
-set clipboard=unnamed
+"if expand('%:t') != ''
+"  au BufWinLeave * mkview
+"  au BufWinEnter * silent loadview
+"endif
 
 " force tabs
 nnoremap gf <C-W>gf
@@ -104,13 +106,13 @@ inoremap jk <esc>
 inoremap ,. <esc>
 
 " colemak line traversal
-let colemak=0
-if colemak==1
-  nnoremap n h
-  nnoremap e j
-  nnoremap i k
-  nnoremap o l
-endif
+"let colemak=0
+"if colemak==1
+"  nnoremap n h
+"  nnoremap e j
+"  nnoremap i k
+"  nnoremap o l
+"endif
 
 " emulate emacs/bash Ctrl-a and Ctrl-e movement in the : prompt
 cnoremap <C-A> <Home>
@@ -177,12 +179,12 @@ set noswapfile
 call plug#begin()
 
 Plug 'edkolev/tmuxline.vim'
-Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
+"Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
 Plug 'https://github.com/johnnybgoode/format-keymap.vim.git'
 Plug 'justinmk/vim-sneak'
-Plug 'kien/ctrlp.vim'
-Plug 'preservim/nerdtree'
-Plug 'preservim/tagbar'
+"Plug 'kien/ctrlp.vim'
+"Plug 'preservim/nerdtree'
+"Plug 'preservim/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -192,11 +194,13 @@ call plug#end()
 " Plugin config
 
 "  nerdtree
-nnoremap <leader>n :NERDTreeToggle<CR>
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+"nnoremap <leader>n :NERDTreeToggle<CR>
+"map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 "  airline
 set laststatus=2
+set title
+set titlestring=%F
 
 let g:airline_powerline_fonts=1
 
@@ -209,26 +213,25 @@ let g:airline_inactive_collapse=1
 
 let g:airline_theme='angr'
 
-"  tmuxline
+" tmuxline
 " disable so tmuxline doesn't overwrite the tmux config
-let g:airline#extensions#tmuxline#enabled = 0
+" let g:airline#extensions#tmuxline#enabled = 0
 
 "  Ctrl-P
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.(git|hg|svn)\|node_modules$\|log\|tmp$',
-  \ 'file': '\.(so|dat|DS_Store)$',
-  \ }
-nmap <leader>lw :CtrlP<CR><C-\>w
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_working_path_mode = 'r'
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\.(git|hg|svn)\|node_modules$\|log\|tmp$',
+"  \ 'file': '\.(so|dat|DS_Store)$',
+"  \ }
+"nmap <leader>lw :CtrlP<CR><C-\>w
 
 " Tagbar
-nnoremap <leader>tt :TagbarToggle<CR>
+"nnoremap <leader>tt :TagbarToggle<CR>
 
 " Colemak
-nnoremap <leader>K source "$HOME/.vim/vim-colemak/plugin/colemak.vim"
+"nnoremap <leader>K source "$HOME/.vim/vim-colemak/plugin/colemak.vim"
 
 " Surround
 
-
-""
+"
