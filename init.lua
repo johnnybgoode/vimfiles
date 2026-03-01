@@ -11,9 +11,9 @@ vim.wo.relativenumber = true
 vim.g.mapleader = " "
 vim.keymap.set('c', '<C-A>', '<Home>')
 vim.keymap.set('c', '<C-E>', '<End>')
-vim.keymap.set('n', '<leader>i', '^')
-vim.keymap.set('n', '<leader>a', '$')
-vim.keymap.set('i', 'nn', '<Esc>', { silent = true })
+vim.keymap.set('n', '<leader>i', 'm`^')
+vim.keymap.set('n', '<leader>a', 'm`$')
+vim.keymap.set('i', 'hh', '<Esc>', { silent = true })
 vim.keymap.set('n', '<leader>s', function()
   vim.cmd("source %")
   vim.notify("Neovim config reload!", vim.log.levels.INFO)
