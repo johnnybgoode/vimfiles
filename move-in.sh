@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-ROOT_DIR="$(cd "$(dirname "$0")" &> /dev/null && pwd -P)"
+shopt -s extglob
+
+ROOT_DIR="$(cd "$(dirname "$0")" &>/dev/null && pwd -P)"
 
 #  vim-plug
 if [ ! -e "$ROOT_DIR/vim/autoload/plug.vim" ]; then
@@ -16,15 +18,19 @@ if [ -z "$(ls .)" ]; then
 fi
 
 INSTALL_FONTS=("DroidSansMono" "Inconsolata" "Inconsolata-g" "RobotoMono" "SourceCodePro")
-FONTS=$(IFS='|'; echo "${INSTALL_FONTS[*]}")
+FONTS=$(
+  IFS='|'
+  echo "${INSTALL_FONTS[*]}"
+)
 
 find . -maxdepth 1 | grep -v "\.$\|${FONTS//|/\|}\|install\.sh" | xargs rm -rf
 
 ./install.sh
 cd .. && rm -rf fonts
 
-exit 0
-for file in $(ls "$ROOT_DIR" | grep -v "move-in"); do
+for file in !(*move-in.sh*|nvim); do
   echo "Linking '$file'..."
   ln -ns "$ROOT_DIR/$file" "$HOME/.$file"
 done
+
+ln -ns $ROOT_DIR/nvim $HOME/.config/nvim
