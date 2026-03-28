@@ -43,6 +43,3 @@ require("lazy").setup({
 		},
 	},
 })
-
--- Surround
---require('mini.surround').setup()

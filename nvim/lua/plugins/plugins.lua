@@ -19,4 +19,7 @@ return {
 			colorscheme = "melange",
 		},
 	},
+	{ "blink.cmp", enabled = false },
+	{ "folke/noice.nvim", enabled = false },
+	{ "folke/which-key.nvim", enabled = false },
 }
